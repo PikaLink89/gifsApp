@@ -20,4 +20,8 @@ export class SiderbarComponent {
     return this.GifsService.historial;
   }
 
+  buscar (terminoBusqueda: string){
+   this.GifsService.buscarGifs(terminoBusqueda); //envía al servicio lo que tiene que buscar al hacer click
+  }
+
 }
