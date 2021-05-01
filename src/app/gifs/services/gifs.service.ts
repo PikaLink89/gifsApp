@@ -17,7 +17,13 @@ export class GifsService {
     return [...this._historial];
   }
 
-  constructor(private http:HttpClient){}
+  constructor(private http:HttpClient){
+
+    if(localStorage.getItem('historial')!=null){
+      this._historial = JSON.parse(localStorage.getItem('historial')); //2. cargamos el historial que almacenamos antes y lo pasamos de json a string
+
+    }
+  }
   buscarGifs(query: string = ''){
 
     query = query.trim().toLowerCase(); //recibe en minuscula
@@ -27,6 +33,8 @@ export class GifsService {
 
       this._historial.unshift(query); //unshift inserta al inicio
       this._historial = this._historial.splice(0,10); //Tamaño de 10 maximo del array
+
+      localStorage.setItem('historial', JSON.stringify(this._historial)); //1. Almacenamos en local el historial, lo tiene que guardar como un string, por lo que usamos el json.stringfy
 
       
     }
